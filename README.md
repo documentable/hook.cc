@@ -1,8 +1,6 @@
-# hook.cc ui library
-
 ![hook.cc banner](images/banner.png)
 
-`hook.cc` is a stealth-focused ui library for roblox scripts built with the main eye of security for its users
+`hook.cc` is a safety-focused ui library for roblox scripts built with the main eye of security and stealth for its users
 
 ---
 
