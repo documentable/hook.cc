@@ -1,7 +1,6 @@
---// hook.cc library
-
 local hook_cc = {}
 local uis = game:GetService("UserInputService")
+local httpService = game:GetService("HttpService")
 
 local objects = {}
 local activeTab = nil
@@ -10,6 +9,64 @@ local dragging = false
 local dragOffset = Vector2.new(0, 0)
 local mouse = uis:GetMouseLocation
 local runtimeConnections = {}
+
+local configFolderName = nil
+local readWriteEnabled = true
+
+function hook_cc:SetConfigFolder(folderName)
+    if typeof(folderName) == "string" and #folderName > 0 then
+        configFolderName = folderName
+        pcall(function()
+            makefolder(configFolderName)
+            makefolder(configFolderName .. "/configs")
+            makefolder(configFolderName .. "/themes")
+        end)
+    else
+        warn("[hook.cc] You must set a valid folder name using SetConfigFolder(name)")
+    end
+end
+
+function hook_cc:DisableReadWrite()
+    readWriteEnabled = false
+end
+
+function hook_cc:SaveConfig(tab, fileName)
+    if not readWriteEnabled then return end
+    if not configFolderName then
+        warn("[hook.cc] Cannot save config: No folder name set. Use SetConfigFolder(name)")
+        return
+    end
+    local data = {}
+    for _, element in ipairs(tab.__elements or {}) do
+        if element.Text then
+            table.insert(data, element.Text)
+        end
+    end
+    local json = httpService:JSONEncode(data)
+    writefile(configFolderName .. "/configs/" .. fileName .. ".json", json)
+end
+
+function hook_cc:LoadConfig(tab, fileName)
+    if not readWriteEnabled then return end
+    if not configFolderName then
+        warn("[hook.cc] Cannot load config: No folder name set. Use SetConfigFolder(name)")
+        return
+    end
+    local path = configFolderName .. "/configs/" .. fileName .. ".json"
+    if not isfile(path) then
+        warn("[hook.cc] Config file does not exist:", path)
+        return
+    end
+    local success, content = pcall(readfile, path)
+    if success then
+        local decoded = httpService:JSONDecode(content)
+        for i, val in ipairs(decoded) do
+            if tab.__elements and tab.__elements[i] and tab.__elements[i].SetText then
+                tab.__elements[i]:SetText(val)
+            end
+        end
+    end
+end
 
 local jsonEncode = function(t)
     local HttpService = game:GetService("HttpService")
