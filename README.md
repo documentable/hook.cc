@@ -98,7 +98,7 @@ DrawingLib:Unload() -- full cleanup
 ## example init
 
 ```lua
-local DrawingLib = loadstring(game:HttpGet("https://github.com/documentable/hook.cc/library.lua"))()
+local DrawingLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/documentable/hook.cc/refs/heads/main/library.lua"))()
 local main = DrawingLib:CreateTab("main")
 
 main:AddLabel("hook.cc ready")
