@@ -8,10 +8,6 @@ return function(hook_cc)
         keyMap[key.Name] = key
     end
 
-    ------------------------------------------------------------------------
-    -- COMMON ALIASES
-    ------------------------------------------------------------------------
-
     keyMap.Enter     = Enum.KeyCode.Return
     keyMap.RCtrl     = Enum.KeyCode.RightControl
     keyMap.LCtrl     = Enum.KeyCode.LeftControl
@@ -20,10 +16,6 @@ return function(hook_cc)
     keyMap.Alt       = Enum.KeyCode.LeftAlt
     keyMap.Esc       = Enum.KeyCode.Escape
     keyMap.Backspace = Enum.KeyCode.Backspace
-
-    ------------------------------------------------------------------------
-    -- DEFAULT LOOKUP FALLBACK
-    ------------------------------------------------------------------------
 
     setmetatable(keyMap, {
         __index = function(_, key)
