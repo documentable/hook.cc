@@ -21,9 +21,9 @@ local modulePaths = {
     "ui/controls/keybind",
     "ui/controls/colorpicker",
     "ui/controls/label",
-    "ui/controls/dropdown",
 
     "ui/notify",
+    "ui/dropdown",
     "ui/extkeybind",
     "ui/dropdown",
     "ui/scroll",
