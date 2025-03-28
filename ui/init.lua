@@ -1,4 +1,4 @@
--- hook.cc / ui/init.lua (updated: animated tab switching + tab icons)
+-- hook.cc / ui/init.lua (full implementation restored)
 
 return function(hook_cc)
     local Drawing = hook_cc.Drawing
