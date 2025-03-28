@@ -11,7 +11,7 @@ return function(hook_cc)
     local DrawingWrapper = {}
     DrawingWrapper._objects = {}
 
-    function DrawingWrapper:Create(class: string, properties: table)
+    function DrawingWrapper:Create(string, table)
         local success, object = pcall(Drawing.new, class)
         if not success then
             hook_cc:Log("Invalid Drawing type: " .. tostring(class), Color3.fromRGB(255, 100, 100))
@@ -47,7 +47,7 @@ return function(hook_cc)
         return UserInputService:GetMouseLocation()
     end
 
-    function Input:IsKeyDown(keycode: Enum.KeyCode)
+    function Input:IsKeyDown(Enum.KeyCode)
         return UserInputService:IsKeyDown(keycode)
     end
 
@@ -55,7 +55,7 @@ return function(hook_cc)
         return UserInputService:GetMouseDelta()
     end
 
-    function Input:IsComboPressed(keys: {Enum.KeyCode})
+    function Input:IsComboPressed({Enum.KeyCode})
         for _, key in ipairs(keys) do
             if not UserInputService:IsKeyDown(key) then
                 return false
@@ -73,7 +73,7 @@ return function(hook_cc)
     local Runtime = {}
     Runtime._connections = {}
 
-    function Runtime:TrackConnection(connection: RBXScriptConnection)
+    function Runtime:TrackConnection(RBXScriptConnection)
         if typeof(connection) == "Instance" or typeof(connection) == "RBXScriptConnection" then
             table.insert(self._connections, connection)
         end
