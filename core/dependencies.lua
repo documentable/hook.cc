@@ -47,7 +47,7 @@ return function(hook_cc)
         return UserInputService:GetMouseLocation()
     end
 
-    function Input:IsKeyDown(Enum.KeyCode)
+    function Input:IsKeyDown({Enum.KeyCode})
         return UserInputService:IsKeyDown(keycode)
     end
 
