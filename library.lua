@@ -1,4 +1,4 @@
--- hook.cc / library.lua (parallel HttpGetAsync loading)
+-- hook.cc / library.lua
 local author = "documentable" -- and zeze
 local repo = "hook.cc"
 local branch = "main"
