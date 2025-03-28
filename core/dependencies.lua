@@ -55,7 +55,7 @@ return function(hook_cc)
         return UserInputService:GetMouseDelta()
     end
 
-    function Input:IsComboPressed({Enum.KeyCode})
+    function Input:IsComboPressed(key)
         for _, key in ipairs(keys) do
             if not UserInputService:IsKeyDown(key) then
                 return false
