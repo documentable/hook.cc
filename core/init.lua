@@ -5,7 +5,7 @@ return function(hook_cc)
     -- SECURE FUNCTION WRAPPER
     ------------------------------------------------------------------------
 
-    function hook_cc.sfunction(callback: function, isolateEnv: boolean)
+function hook_cc.sfunction(callback, isolateEnv)
         if typeof(callback) ~= "function" then
             return function() end
         end
