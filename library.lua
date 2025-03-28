@@ -49,8 +49,6 @@ for _, mod in ipairs(loadedModules) do
     local ok, err = pcall(mod.run, hook_cc)
     if not ok then
         warn("[hook.cc] Error executing module:", mod.path, err)
-    else
-        print(loadedModules)
     end
 end
 
