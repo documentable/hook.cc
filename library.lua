@@ -1,6 +1,6 @@
 -- hook.cc / library.lua (parallel HttpGetAsync loading)
-
-local repo = "documentable/hook.cc"
+local author = "documentable" -- and zeze
+local repo = "hook.cc"
 local branch = "main"
 local hook_cc = _G.hook_cc or {}
 _G.hook_cc = hook_cc
@@ -31,7 +31,7 @@ local modulePaths = {
 }
 
 for _, path in ipairs(modulePaths) do
-    local url = ("https://raw.githubusercontent.com/%s/%s/%s.lua"):format(repo, branch, path)
+    local url = ("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s.lua"):format(author, repo, branch, path)
     local success, source = pcall(function() return game:HttpGetAsync(url) end)
     if success and type(source) == "string" then
         local chunk, err = loadstring(source, path .. ".lua")
