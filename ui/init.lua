@@ -1,4 +1,4 @@
--- hook.cc / ui/init.lua (full implementation restored)
+-- hook.cc / ui/init.lua 
 
 return function(hook_cc)
     local Drawing = hook_cc.Drawing
@@ -84,6 +84,7 @@ return function(hook_cc)
             window.TitleLabel.Transparency = animAlpha
             tooltip.Transparency = animAlpha
 
+            -- Animate active tab fade-in
             if window.ActiveTab then
                 window.ActiveTab.Fade = math.min((window.ActiveTab.Fade or 0) + delta * 4, 1)
                 for _, ctrl in ipairs(window.ActiveTab.Controls) do
