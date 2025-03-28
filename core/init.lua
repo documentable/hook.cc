@@ -25,7 +25,7 @@ function hook_cc.sfunction(callback, isolateEnv)
     -- SECURE LOGGING (ROUTES TO NOTIFY SYSTEM)
     ------------------------------------------------------------------------
 
-    function hook_cc:Log(message: string, color: Color3?)
+    function hook_cc:Log(string, Color3?)
         if typeof(message) ~= "string" then return end
         color = color or Color3.fromRGB(200, 200, 200)
 
