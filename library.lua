@@ -28,13 +28,21 @@ local function fetchModule(path)
 	local success, result = pcall(function()
 		return game:HttpGet(url, true)
 	end)
-	if success and type(result) == "string" then
-		return loadstring(result, path .. ".lua")()
-	else
-		warn("[hook.cc] Failed to fetch module: " .. path)
+
+	if not success then
+		warn("[hook.cc] Failed to fetch module: " .. path .. " | Error: " .. tostring(result))
 		return function() end
 	end
+
+	local loaded, func = pcall(loadstring, result, path .. ".lua")
+	if not loaded then
+		warn("[hook.cc] Failed to compile: " .. path .. " | Error: " .. tostring(func))
+		return function() end
+	end
+
+	return func()
 end
+
 
 local hook_cc = {}
 
