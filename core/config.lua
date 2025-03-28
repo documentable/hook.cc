@@ -161,7 +161,6 @@ return function(hook_cc)
 
         self:Log("Config tab initialized.", Color3.fromRGB(106, 255, 106))
     end
-end
 
 function hook_cc:SetConfigFolder(folderName)
     if typeof(folderName) ~= "string" or #folderName == 0 then
@@ -178,4 +177,5 @@ function hook_cc:SetConfigFolder(folderName)
     end)
 
     self:Log("Config folder set to '" .. folderName .. "'", Color3.fromRGB(106, 255, 106))
+    end
 end
