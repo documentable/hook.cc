@@ -1,5 +1,4 @@
--- hook.cc / ui/notify.lua
-
+-- hook.cc / ui/notify.lua 
 return function(hook_cc)
     local Drawing = hook_cc.Drawing
     local Runtime = hook_cc.Runtime
@@ -15,8 +14,15 @@ return function(hook_cc)
         local message = tostring(text)
         local textColor = color or Color3.fromRGB(255, 255, 255)
 
-        local yOffset = (#active * (lineHeight + padding)) + padding
-        local pos = Vector2.new(workspace.CurrentCamera.ViewportSize.X - maxWidth - padding, padding + yOffset)
+        for _, note in ipairs(active) do
+            note.Box.Position = note.Box.Position - Vector2.new(0, lineHeight + padding)
+            note.Text.Position = note.Text.Position - Vector2.new(0, lineHeight + padding)
+        end
+
+        local pos = Vector2.new(
+            workspace.CurrentCamera.ViewportSize.X - maxWidth - padding,
+            workspace.CurrentCamera.ViewportSize.Y - lineHeight - padding
+        )
 
         local bg = Drawing:Create("Square", {
             Position = pos,
@@ -38,12 +44,8 @@ return function(hook_cc)
             Visible = true
         })
 
-        local note = {
-            Box = bg,
-            Text = label
-        }
-
-        table.insert(active, note)
+        local note = { Box = bg, Text = label }
+        table.insert(active, 1, note)
 
         task.delay(duration, function()
             for i, n in ipairs(active) do
