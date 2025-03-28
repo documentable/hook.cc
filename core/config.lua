@@ -98,7 +98,7 @@ return function(hook_cc)
     -- CREATE CONFIG TAB (MODULAR)
     ------------------------------------------------------------------------
 
-    function hook_cc:CreateConfigTab(folderName: string, window)
+    function hook_cc:CreateConfigTab(string, window)
         if typeof(folderName) ~= "string" or #folderName == 0 then
             self:Log("Invalid config folder name", Color3.fromRGB(255, 100, 100))
             return
