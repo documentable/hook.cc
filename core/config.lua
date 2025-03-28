@@ -7,6 +7,23 @@ return function(hook_cc)
     -- UTILITY: DYNAMIC FOLDERED PATHS
     ------------------------------------------------------------------------
 
+function hook_cc:SetConfigFolder(folderName)
+    if typeof(folderName) ~= "string" or #folderName == 0 then
+        self:Log("Invalid config folder name", Color3.fromRGB(255, 100, 100))
+        return
+    end
+
+    self._configFolder = folderName
+
+    pcall(function()
+        if not isfolder(folderName) then makefolder(folderName) end
+        if not isfolder(folderName .. "/configs") then makefolder(folderName .. "/configs") end
+        if not isfolder(folderName .. "/themes") then makefolder(folderName .. "/themes") end
+    end)
+
+    self:Log("Config folder set to '" .. folderName .. "'", Color3.fromRGB(106, 255, 106))
+    end
+
     local function buildPaths(folder)
         return {
             configFolder = folder,
@@ -160,22 +177,5 @@ return function(hook_cc)
         end)
 
         self:Log("Config tab initialized.", Color3.fromRGB(106, 255, 106))
-    end
-
-function hook_cc:SetConfigFolder(folderName)
-    if typeof(folderName) ~= "string" or #folderName == 0 then
-        self:Log("Invalid config folder name", Color3.fromRGB(255, 100, 100))
-        return
-    end
-
-    self._configFolder = folderName
-
-    pcall(function()
-        if not isfolder(folderName) then makefolder(folderName) end
-        if not isfolder(folderName .. "/configs") then makefolder(folderName .. "/configs") end
-        if not isfolder(folderName .. "/themes") then makefolder(folderName .. "/themes") end
-    end)
-
-    self:Log("Config folder set to '" .. folderName .. "'", Color3.fromRGB(106, 255, 106))
     end
 end
